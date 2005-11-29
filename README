@@ -1,4 +1,4 @@
-Lemonolap-Log4lemon version 0.01
+Lemonolap-Log4lemon version 0.02
 =========================
 
 DESCRIPTION
@@ -7,6 +7,9 @@ DESCRIPTION
 
     The lemonldap framework is a web SSO server apache . This log is like :
 
+    This package provides log wrapper also . 
+    
+    See man pages  Lemonolap::Formatelog ,  Lemonoldap::Log4lemon and the example.pl in eg directory
 
 INSTALLATION
 

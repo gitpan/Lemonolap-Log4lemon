@@ -1,6 +1,6 @@
 package Lemonolap::Log4lemon ;
 use strict;
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 sub can_field {
 my $self = shift;
 return ( 'date','time','node','source','url','response','size','referer','agent','vhost','uid');
@@ -281,7 +281,7 @@ http://lemonldap.sourceforge.net/
 Lemonolap
 http://lemonolap.sourceforge.net/
 
-
+Lemonolap::Formatelog 
 
 
 
