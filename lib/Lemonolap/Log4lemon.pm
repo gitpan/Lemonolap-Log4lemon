@@ -1,6 +1,6 @@
 package Lemonolap::Log4lemon ;
 use strict;
-our $VERSION = '0.02';
+our $VERSION = '0.03';
 sub can_field {
 my $self = shift;
 return ( 'date','time','node','source','url','response','size','referer','agent','vhost','uid');
@@ -177,22 +177,47 @@ if (lc ($name) eq 'time:se') {
 
 }	
 
+sub apply {
+my $self =shift;
+my %args = @_;
+my $file_in = $args{infile};
+my $file_out = $args{outfile};
+$self->{file_in} =$file_in unless $self->{file_in};
+$self->{file_out} =$file_out unless $self->{file_out};
+
+$self->{header} =$args{header};
+my $FILE ;
+my $FILEOUT;
+open ( $FILE,"< $file_in") || die "$file_in $!\n";
+open ( $FILEOUT,"> $file_out") || die "$file_out $!\n";
+$self->{handler} =$FILE;
+if ($self->{header} ) {
+my $separator =$args{separator}||'|';
+my @t =$self->can_field();
+my $l = join $separator, @t;
+print  $FILEOUT "$l\n";
+}
+ while (my $l =$self->get_field_by_name() ) {
+	print $FILEOUT "$l\n" ; 
+ }
+    close $FILE;
+    close $FILEOUT;
+}
 
 sub new {
 my $class =shift;
 my %args = @_;
-my $file = $args{file};
 my $self;
-$self->{file} =$file;
-my $FILE ;
-open ( $FILE,"< $file") || die "$file $!\n";
-$self->{handler} =$FILE;
+$self=\%args;;
 bless $self,$class;
 return $self;
-
 }
 
-
+sub set_output {
+	my $self =shift;
+	$self->{file_out} = shift;
+       return 1;
+}       
 sub set_label {
 my $self =shift;
 my %args = @_;

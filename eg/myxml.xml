@@ -1,6 +1,0 @@
-<lemonolap>
-	<format id="format1"
-		file="extract.log"
-		handler="Lemonolap::Log4lemon"
-	        />
-</lemonldap>	
